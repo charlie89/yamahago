@@ -5,7 +5,7 @@ In the process of writing an HTTPproxy in Go, I started using it to intercept tr
 
 Turn the volume up 2db:
 
-  lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c up
+        lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c up
 	200 OK
 
 Turn the volume down 2db:
