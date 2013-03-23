@@ -5,6 +5,7 @@ import "fmt"
 // start off with messages as strings
 
 func volumeUp() []byte {
+	// 1 decibel is the jnd for the normal human ear
   return []byte("<YAMAHA_AV cmd=\"PUT\"><Main_Zone><Volume><Lvl><Val>Up 2 dB</Val><Exp></Exp><Unit></Unit></Lvl></Volume></Main_Zone></YAMAHA_AV>\r\n")
 }
 
