@@ -22,9 +22,9 @@ func toggleMute() []byte {
 }
 
 func powerOn() []byte {
-  return []byte("<YAMAHA_AV cmd=\"PUT\"><System><Power_Control><Power>On</Power></Power_Control></System></YAMAHA_AV>")
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><System><Power_Control><Power>On</Power></Power_Control></System></YAMAHA_AV>\r\n")
 }
 
 func standBy() []byte {
-  return []byte("<YAMAHA_AV cmd=\"PUT\"><System><Power_Control><Power>Standby</Power></Power_Control></System></YAMAHA_AV>")
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><System><Power_Control><Power>Standby</Power></Power_Control></System></YAMAHA_AV>\r\n")
 }
