@@ -1,35 +1,36 @@
 yamahago
 ========
 
-In the process of writing an HTTPproxy in Go, I started using it to intercept traffic between the iPhone app for the Yamaha RX-A720 that sits in my living room. I used the intercepted requests to build this little controller (and also discover that the thing has a web UI). 
+Controls your Yamaha AV/Receiver, should work with most RX-V* or RX-A* AV/Receivers.
+
+The compiled program has very little latency compared to something bigger like yamaha-nodejs.
+I use this script to control my AV-Receiver right off the G-Keys on my gaming keyboard.
+
 
 Turn the volume up 2db:
-
-    lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c up
-    200 OK
+    yamaha -h 192.168.1.21 -c up
 
 Turn the volume down 2db:
-
-    lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c down
-    200 OK
-
-Set the volume to -34.0db:
-
-    lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c 340
-    200 OK
+    yamaha -h 192.168.1.21 -c down
 
 Toggle mute/unmute:
-
-    lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c mute
-    200 OK
+    yamaha -h 192.168.1.21 -c mute
 
 Power on: 
-
-    lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c on
-    200 OK
+    yamaha -h 192.168.1.21 -c on
 
 Power standby:
+    yamaha -h 192.168.1.21 -c off
 
-    lollipop:go erin$ bin/yamaha -h 192.168.1.83:80 -c off
-    200 OK
+Switch to input HDMI1: (hdmi1-hdmi5 implemented)
+    yamaha -h 192.168.1.21 -c hdmi1
 
+Switch to input SERVER:
+    yamaha -h 192.168.1.21 -c server
+
+Switch to input NET RADIO:
+    yamaha -h 192.168.1.21 -c netradio
+
+
+
+Special thanks to boboTjones for this beautiful template, it saved me a lot of work.

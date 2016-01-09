@@ -71,6 +71,37 @@ func makeHeader(cl int64) Header {
   return h
 }
 
+func volumeUp() []byte {
+	// 1 decibel is the jnd for the normal human ear
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><Main_Zone><Volume><Lvl><Val>Up 2 dB</Val><Exp></Exp><Unit></Unit></Lvl></Volume></Main_Zone></YAMAHA_AV>\r\n")
+}
+
+func volumeDown() []byte {
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><Main_Zone><Volume><Lvl><Val>Down 2 dB</Val><Exp></Exp><Unit></Unit></Lvl></Volume></Main_Zone></YAMAHA_AV>\r\n")
+}
+
+func volumeAt(str string) []byte {
+  m := "<YAMAHA_AV cmd=\"PUT\"><Main_Zone><Volume><Lvl><Val>-%s</Val><Exp>1</Exp><Unit>dB</Unit></Lvl></Volume></Main_Zone></YAMAHA_AV>\r\n"
+  return []byte(fmt.Sprintf(m, str))
+}
+
+func toggleMute() []byte {
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><Main_Zone><Volume><Mute>On/Off</Mute></Volume></Main_Zone></YAMAHA_AV>\r\n")
+}
+
+func powerOn() []byte {
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><System><Power_Control><Power>On</Power></Power_Control></System></YAMAHA_AV>\r\n")
+}
+
+func standBy() []byte {
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><System><Power_Control><Power>Standby</Power></Power_Control></System></YAMAHA_AV>\r\n")
+}
+
+func switchInput(input string) []byte {
+  return []byte("<YAMAHA_AV cmd=\"PUT\"><Main_Zone><Input><Input_Sel>" + input + "</Input_Sel></Input></Main_Zone></YAMAHA_AV>\r\n")
+}
+
+
 func main() {
   flag.Parse()
   target := ""
@@ -83,7 +114,7 @@ func main() {
     target = "http://" + yHost + actionPath
   } else {
     //for testing with a proxy
-    target = "http://127.0.0.1:8080" + actionPath
+    target = "http://rx-v679.lan" + actionPath
   }
   u, err := url.Parse(target)
   if err != nil {
@@ -101,9 +132,24 @@ func main() {
     b = powerOn()
   case "off":
     b = standBy()
+  case "hdmi1":
+    b = switchInput("HDMI1")
+  case "hdmi2":
+    b = switchInput("HDMI2")
+  case "hdmi3":
+    b = switchInput("HDMI3")
+  case "hdmi4":
+    b = switchInput("HDMI4")
+  case "hdmi5":
+    b = switchInput("HDMI5")
+  case "netradio":
+    b = switchInput("NET RADIO")
+  case "server":
+    b = switchInput("SERVER")
   default:
     // oh noes. this could be bad.
-    b = volumeAt(command)
+    // therefore commented it out, not that i blow the neighbors away :)
+    //b = volumeAt(command)
   }
 
   buf.Write(b)
